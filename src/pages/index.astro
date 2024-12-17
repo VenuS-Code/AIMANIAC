@@ -1,5 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BlogCard from '../components/blog/BlogCard.astro';
+
+const posts = await getCollection('blog');
+const latestPosts = posts
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
 ---
 
 <Layout title="Home">
@@ -11,17 +18,14 @@ import Layout from '../layouts/Layout.astro';
 	<section class="featured-content">
 		<h2>Latest Posts</h2>
 		<div class="content-grid">
-			<!-- Add your latest blog posts here -->
-			<article class="content-card">
-				<h3>Getting Started with AI</h3>
-				<p>Learn the basics of artificial intelligence and machine learning...</p>
-				<a href="/blog/The-Future-of-Artificial-Intelligence" class="read-more">Read More →</a>
-			</article>
-                        <article class="content-card">
-				<h3>The Future of Artificial Intelligence</h3>
-				<p>Learn the basics of artificial intelligence and machine learning...</p>
-				<a href="/blog/getting-started" class="read-more">Read More →</a>
-			</article>
+			{latestPosts.map(post => (
+				<BlogCard
+					title={post.data.title}
+					description={post.data.description}
+					publishDate={post.data.publishDate}
+					url={`/blog/${post.slug}`}
+				/>
+			))}
 		</div>
 	</section>
 
@@ -61,29 +65,16 @@ import Layout from '../layouts/Layout.astro';
 		margin-bottom: 3rem;
 	}
 
+	h2 {
+		font-size: 2rem;
+		color: rgb(var(--primary));
+		margin-bottom: 1.5rem;
+	}
+
 	.content-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
-		margin-top: 2rem;
-	}
-
-	.content-card {
-		padding: 1.5rem;
-		border: 1px solid rgba(var(--primary), 0.2);
-		border-radius: 0.5rem;
-		transition: transform 0.2s;
-	}
-
-	.content-card:hover {
-		transform: translateY(-3px);
-	}
-
-	.read-more {
-		display: inline-block;
-		margin-top: 1rem;
-		color: rgb(var(--primary));
-		text-decoration: none;
 	}
 
 	.cta {
