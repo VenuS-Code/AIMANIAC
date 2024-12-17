@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://yourusername.github.io',
-  base: '/ai-maniac'
+  site: 'https://VenuS-Code.github.io',
+  base: '/AIMANIAC',
+  output: 'static'
 });

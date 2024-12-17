@@ -1,0 +1,79 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  url: string;
+}
+
+const { title, description, publishDate, url } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(publishDate);
+---
+
+<article class="blog-card">
+  <div class="content">
+    <h2><a href={url}>{title}</a></h2>
+    <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+    <p>{description}</p>
+    <a href={url} class="read-more">Read More →</a>
+  </div>
+</article>
+
+<style>
+  .blog-card {
+    background: white;
+    border: 1px solid rgba(var(--primary), 0.2);
+    border-radius: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  h2 a {
+    color: rgb(var(--primary));
+    text-decoration: none;
+  }
+
+  time {
+    display: block;
+    font-size: 0.875rem;
+    color: rgb(var(--text));
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: rgb(var(--text));
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: rgb(var(--primary));
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .read-more:hover {
+    text-decoration: underline;
+  }
+</style>

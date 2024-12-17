@@ -1,0 +1,29 @@
+---
+import BlogCard from './BlogCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="blog-grid">
+  {posts.map(post => (
+    <BlogCard
+      title={post.data.title}
+      description={post.data.description}
+      publishDate={post.data.publishDate}
+      url={`/blog/${post.slug}`}
+    />
+  ))}
+</div>
+
+<style>
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+</style>

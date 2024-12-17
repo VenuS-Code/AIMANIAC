@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { formatDate } from '../../utils/date';
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('blog');
@@ -10,19 +11,27 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
 <Layout title={entry.data.title}>
     <article class="blog-post">
-        <h1>{entry.data.title}</h1>
-        <div class="metadata">
-            <time datetime={entry.data.publishDate.toISOString()}>
-                {entry.data.publishDate.toLocaleDateString()}
-            </time>
-        </div>
+        <header>
+            <h1>{entry.data.title}</h1>
+            <div class="metadata">
+                <time datetime={entry.data.publishDate.toISOString()}>
+                    {formatDate(entry.data.publishDate)}
+                </time>
+            </div>
+        </header>
+        
         <div class="content">
-            {entry.body}
+            <Content />
         </div>
+
+        <footer>
+            <a href="/blog" class="back-link">← Back to all posts</a>
+        </footer>
     </article>
 </Layout>
 
@@ -30,21 +39,63 @@ const { entry } = Astro.props;
     .blog-post {
         max-width: 720px;
         margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    header {
+        margin-bottom: 2rem;
+        text-align: center;
     }
 
     h1 {
         font-size: 2.5rem;
         color: rgb(var(--primary));
         margin-bottom: 1rem;
+        line-height: 1.2;
     }
 
     .metadata {
         color: rgb(var(--text));
         opacity: 0.8;
-        margin-bottom: 2rem;
     }
 
     .content {
         line-height: 1.8;
+        font-size: 1.1rem;
+    }
+
+    .content :global(h2) {
+        font-size: 1.8rem;
+        color: rgb(var(--primary));
+        margin: 2rem 0 1rem;
+    }
+
+    .content :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    .content :global(ul) {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .content :global(li) {
+        margin: 0.5rem 0;
+    }
+
+    footer {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(var(--primary), 0.2);
+    }
+
+    .back-link {
+        color: rgb(var(--primary));
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
     }
 </style>

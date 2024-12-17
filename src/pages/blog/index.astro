@@ -1,34 +1,46 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BlogList from '../../components/blog/BlogList.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => 
+    b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
 ---
 
-<Layout title="Blog">
-  <h1>Latest Blog Posts</h1>
-  <div class="blog-grid">
-    {posts.map(post => (
-      <BlogCard
-        title={post.data.title}
-        description={post.data.description}
-        publishDate={post.data.publishDate}
-        url={`/blog/${post.slug}`}
-      />
-    ))}
-  </div>
+<Layout title="Blog" description="Explore our latest articles about AI, machine learning, and technology">
+    <div class="blog-container">
+        <header>
+            <h1>Latest Blog Posts</h1>
+            <p>Explore the latest insights about AI, machine learning, and technology</p>
+        </header>
+        
+        <BlogList posts={sortedPosts} />
+    </div>
 </Layout>
 
 <style>
-  h1 {
-    font-size: 2.5rem;
-    color: rgb(var(--primary));
-    margin-bottom: 2rem;
-  }
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: rgb(var(--primary));
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: rgb(var(--text));
+        opacity: 0.8;
+    }
 </style>

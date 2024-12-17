@@ -1,0 +1,63 @@
+---
+interface SocialLink {
+  platform: string;
+  url: string;
+  icon: string;
+}
+
+const socialLinks: SocialLink[] = [
+  {
+    platform: 'YouTube',
+    url: '#',
+    icon: '📺'
+  },
+  {
+    platform: 'Twitter',
+    url: '#',
+    icon: '🐦'
+  },
+  {
+    platform: 'LinkedIn',
+    url: '#',
+    icon: '💼'
+  }
+];
+---
+
+<div class="social-links">
+  {socialLinks.map(({ platform, url, icon }) => (
+    <a href={url} class="social-link" title={platform}>
+      <span class="icon">{icon}</span>
+      <span>{platform}</span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgb(var(--primary));
+    color: white;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: opacity 0.2s;
+  }
+
+  .social-link:hover {
+    opacity: 0.9;
+  }
+
+  .icon {
+    font-size: 1.2em;
+  }
+</style>
