@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home">
+	<div class="hero">
+		<h1>Welcome to AI-MANIAC</h1>
+		<p>Your go-to source for AI insights, tutorials, and cutting-edge developments</p>
+	</div>
+
+	<section class="featured-content">
+		<h2>Latest Posts</h2>
+		<div class="content-grid">
+			<!-- Add your latest blog posts here -->
+			<article class="content-card">
+				<h3>Getting Started with AI</h3>
+				<p>Learn the basics of artificial intelligence and machine learning...</p>
+				<a href="/blog/getting-started" class="read-more">Read More →</a>
+			</article>
+		</div>
+	</section>
+
+	<section class="cta">
+		<h2>Stay Updated</h2>
+		<p>Follow me on social media for the latest updates and insights!</p>
+		<div class="social-links">
+			<a href="#" class="social-link">YouTube</a>
+			<a href="#" class="social-link">Twitter</a>
+			<a href="#" class="social-link">LinkedIn</a>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		text-align: center;
+		padding: 4rem 0;
+		background: linear-gradient(rgba(var(--primary), 0.1), rgba(var(--primary), 0.05));
+		border-radius: 1rem;
+		margin-bottom: 3rem;
+	}
+
+	.hero h1 {
+		font-size: 3rem;
+		color: rgb(var(--primary));
+		margin-bottom: 1rem;
+	}
+
+	.hero p {
+		font-size: 1.25rem;
+		color: rgb(var(--text));
+		opacity: 0.8;
+	}
+
+	.featured-content {
+		margin-bottom: 3rem;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.content-card {
+		padding: 1.5rem;
+		border: 1px solid rgba(var(--primary), 0.2);
+		border-radius: 0.5rem;
+		transition: transform 0.2s;
+	}
+
+	.content-card:hover {
+		transform: translateY(-3px);
+	}
+
+	.read-more {
+		display: inline-block;
+		margin-top: 1rem;
+		color: rgb(var(--primary));
+		text-decoration: none;
+	}
+
+	.cta {
+		text-align: center;
+		padding: 3rem;
+		background: linear-gradient(rgba(var(--primary), 0.1), rgba(var(--primary), 0.05));
+		border-radius: 1rem;
+	}
+
+	.social-links {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		margin-top: 1.5rem;
+	}
+
+	.social-link {
+		padding: 0.5rem 1rem;
+		background: rgb(var(--primary));
+		color: white;
+		text-decoration: none;
+		border-radius: 0.25rem;
+		transition: opacity 0.2s;
+	}
+
+	.social-link:hover {
+		opacity: 0.9;
+	}
+</style>

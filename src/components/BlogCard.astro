@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  url: string;
+}
+
+const { title, description, publishDate, url } = Astro.props;
+---
+
+<article class="blog-card">
+  <h2>{title}</h2>
+  <time datetime={publishDate.toISOString()}>
+    {publishDate.toLocaleDateString()}
+  </time>
+  <p>{description}</p>
+  <a href={url} class="read-more">Read More →</a>
+</article>
+
+<style>
+  .blog-card {
+    padding: 1.5rem;
+    border: 1px solid rgba(var(--primary), 0.2);
+    border-radius: 0.5rem;
+    transition: transform 0.2s;
+  }
+  .blog-card:hover {
+    transform: translateY(-3px);
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--primary));
+  }
+  time {
+    display: block;
+    color: rgb(var(--text));
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: rgb(var(--primary));
+    text-decoration: none;
+  }
+</style>

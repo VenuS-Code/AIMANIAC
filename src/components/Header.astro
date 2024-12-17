@@ -1,0 +1,53 @@
+---
+const navItems = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/videos', label: 'Videos' },
+  { href: '/about', label: 'About' }
+];
+---
+
+<header class="site-header">
+  <nav>
+    <div class="nav-content">
+      <a href="/" class="site-title">AI-MANIAC</a>
+      <div class="nav-links">
+        {navItems.map(item => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    background: rgb(var(--primary));
+    color: white;
+    padding: 1rem;
+  }
+  .nav-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+</style>
